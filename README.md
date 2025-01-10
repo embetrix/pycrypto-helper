@@ -46,7 +46,7 @@ Verifies the given CMS signature for the specified data using the certificate.
 
 ### `crypto_helper.encrypt(key_desc, ivt, data, pin)`
 
-Encrypts the given data using the specified key.
+Encrypts using AES the given data using the specified key.
 
 - `key_desc`: A string describing the key (key file or pkcs11 uri).
 - `ìvt`: The initialization vector.
@@ -55,7 +55,7 @@ Encrypts the given data using the specified key.
 
 ### `crypto_helper.decrypt(key_desc, ivt, encrypted_data, pin)`
 
-Decrypts the given encrypted data using the specified key.
+Decrypts using AES the given encrypted data using the specified key.
 
 - `key_desc`: A string describing the key (key file or pkcs11 uri).
 - `ìvt`: The initialization vector.
