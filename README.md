@@ -29,7 +29,7 @@ Verifies the given signature for the specified data using the key.
 
 ### `crypto_helper.cms_sign(key_desc, cert, data, pin)`
 
-Signs the given data using the specified key.
+Signs using CMS the given data using the specified key and certificate.
 
 - `key_desc`: A string describing the key (key file in pem format or pkcs11 uri).
 - `cert`: The certificate file in pem format.
@@ -38,7 +38,7 @@ Signs the given data using the specified key.
 
 ### `crypto_helper.cms_verify(data, cert, signature)`
 
-Signs the given data using the specified key.
+Verifies the given CMS signature for the specified data using the certificate.
 
 - `data`: The data to be signed.
 - `cert`: The certificate file in pem format.
