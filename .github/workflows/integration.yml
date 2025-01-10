@@ -1,0 +1,26 @@
+name: integration
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get --no-install-recommends install -y python3 python3-pip python3-setuptools python3-wheel openssl libssl-dev softhsm2 opensc
+
+    - name: Build
+      # Build your program with the given configuration
+      run: sudo python3 -m pip install .
+
+    - name: Test
+      working-directory: ${{github.workspace}}
+      run: ./run_tests.sh
+
