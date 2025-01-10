@@ -2,7 +2,7 @@
 #
 # Copyright (c) 2025
 # Embetrix Embedded Systems Solutions, ayoub.zaki@embetrix.com
-
+#
 
 echo "Running pycrypto-helper tests..."
 export PKCS11_MODULE_PATH=/usr/lib/softhsm/libsofthsm2.so
