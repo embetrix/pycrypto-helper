@@ -25,10 +25,11 @@ from pkcs11 import KeyType, ObjectClass, Mechanism
 from pkcs11.util.ec import encode_ec_public_key
 from pkcs11.util.rsa import encode_rsa_public_key
 from base64 import b64encode, b64decode
-from Crypto.Hash import SHA256
-from Crypto.PublicKey import ECC, RSA
-from Crypto.Signature import DSS, PKCS1_v1_5
-from Crypto.Cipher import AES
+from Cryptodome.Hash import SHA256
+from Cryptodome.PublicKey import ECC, RSA
+from Cryptodome.Signature import DSS, PKCS1_v1_5
+from Cryptodome.Cipher import AES
+from Cryptodome.Util.Padding import pad, unpad
 from Crypto.Util.Padding import pad, unpad
 from urllib.parse import urlparse, parse_qs, unquote
 from asn1crypto import cms, pem, x509, algos, core

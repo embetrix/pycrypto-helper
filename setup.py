@@ -10,7 +10,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'python-pkcs11',
-        'pycryptodome',
+        'pycryptodomex',
         'asn1crypto'
     ],
     classifiers=[
