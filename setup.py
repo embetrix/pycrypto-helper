@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pycrypto_helper',
-    version='0.1.0',
+    version='0.2.0',
     description='A helper library for cryptographic operations',
     author='Embetrix',
     author_email='info@embetrix.com',
