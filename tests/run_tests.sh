@@ -25,6 +25,8 @@ openssl genpkey -algorithm RSA -out rsa_key.pem -pkeyopt rsa_keygen_bits:2048 -a
 openssl rsa -pubout -in rsa_key.pem -out rsa_pubkey.pem -passin pass:pa33w0rd  > /dev/null 2>&1
 openssl req -new -x509 -key rsa_key.pem -passin pass:pa33w0rd -out rsa_cert.pem -days 365 -subj "/O=Embetrix/CN=HSM-Test/emailAddress=info@embetrix.com"  > /dev/null 2>&1
 
+openssl req -new -x509 -engine pkcs11 -keyform engine -key "pkcs11:object=testkeyECp256?pin-value=12345"  -out testcertECp256.pem -days 365 -subj "/O=Embetrix/CN=HSM-Test/emailAddress=info@embetrix.com"
+openssl req -new -x509 -engine pkcs11 -keyform engine -key "pkcs11:object=testkeyRSA2048?pin-value=12345" -out testcertRSA2048.pem -days 365 -subj "/O=Embetrix/CN=HSM-Test/emailAddress=info@embetrix.com"
 
 openssl ecparam -name prime256v1 -genkey -noout -out ecdsa_key.pem  > /dev/null 2>&1
 openssl ec -in ecdsa_key.pem -pubout -out ecdsa_pubkey.pem  > /dev/null 2>&1

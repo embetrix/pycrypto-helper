@@ -14,6 +14,14 @@ def test_get_key_type():
     key_type = crypto_helper.get_key_type(key_desc)
     assert key_type == 'EC', f"Expected 'EC', got {key_type}"
 
+    key_desc = "pkcs11:token=token0;object=testkeyRSA2048"
+    key_type = crypto_helper.get_key_type(key_desc, "12345")
+    assert key_type == 'RSA', f"Expected 'RSA', got {key_type}"
+
+    key_desc = "pkcs11:token=token0;object=testkeyECp256"
+    key_type = crypto_helper.get_key_type(key_desc, "12345")
+    assert key_type == 'EC', f"Expected 'EC', got {key_type}"
+
 def test_load_pem_certificate():
     cert_path = "rsa_cert.pem"
     cert = crypto_helper.load_pem_certificate(cert_path)
@@ -32,12 +40,36 @@ def test_sign_and_verify():
     assert signature is not None, "Failed to sign data"
     crypto_helper.verify(key_desc, data, signature, "pa33w0rd")
 
-def test_cms_sign_and_verify():
-    key_desc = "rsa_key.pem"
+def test_pkcs11_sign_and_verify():
+    key_desc = "pkcs11:token=token0;object=testkeyECp256"
     data = b"Hello, world!"
+    signature = crypto_helper.sign(key_desc, data, "12345")
+    assert signature is not None, "Failed to sign data"
+    crypto_helper.verify(key_desc, data, signature, "12345")
+
+def test_cms_sign_and_verify():
+    data = b"Hello, world!"
+    key_desc = "rsa_key.pem"
     signature = crypto_helper.cms_sign(key_desc, "rsa_cert.pem", data, "pa33w0rd")
     assert signature is not None, "Failed to sign data"
     crypto_helper.cms_verify("rsa_cert.pem",data, signature)
+
+    key_desc = "ecdsa_key.pem"
+    signature = crypto_helper.cms_sign(key_desc, "ecdsa_cert.pem", data)
+    assert signature is not None, "Failed to sign data"
+    crypto_helper.cms_verify("ecdsa_cert.pem", data, signature)
+
+def test_pkcs11_cms_sign_and_verify():
+    data = b"Hello, world!"
+    key_desc = "pkcs11:token=token0;object=testkeyRSA2048"
+    signature = crypto_helper.cms_sign(key_desc, "testcertRSA2048.pem", data, "12345")
+    assert signature is not None, "Failed to sign data"
+    crypto_helper.cms_verify("testcertRSA2048.pem", data, signature)
+
+    key_desc = "pkcs11:token=token0;object=testkeyECp256"
+    signature = crypto_helper.cms_sign(key_desc, "testcertECp256.pem", data, "12345")
+    assert signature is not None, "Failed to sign data"
+    crypto_helper.cms_verify("testcertECp256.pem", data, signature)
 
 def test_encrypt_and_decrypt():
     key_desc = "aes.key"
@@ -54,7 +86,9 @@ if __name__ == "__main__":
         test_load_pem_certificate()
         test_parse_pkcs11_uri()
         test_sign_and_verify()
+        test_pkcs11_sign_and_verify()
         test_cms_sign_and_verify()
+        test_pkcs11_cms_sign_and_verify()
         test_encrypt_and_decrypt()
         print("All tests passed!")
     except Exception as e:
