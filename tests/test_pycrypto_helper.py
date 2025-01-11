@@ -37,7 +37,7 @@ def test_cms_sign_and_verify():
     data = b"Hello, world!"
     signature = crypto_helper.cms_sign(key_desc, "rsa_cert.pem", data, "pa33w0rd")
     assert signature is not None, "Failed to sign data"
-    crypto_helper.cms_verify(data, "rsa_cert.pem", signature)
+    crypto_helper.cms_verify("rsa_cert.pem",data, signature)
 
 def test_encrypt_and_decrypt():
     key_desc = "aes.key"
