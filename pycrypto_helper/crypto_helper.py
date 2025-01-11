@@ -29,7 +29,7 @@ def load_key_file(file_path, password=None):
             except (ValueError, TypeError):
                 return key_data
 
-def load_key(key_desc, pin=None, key_type=None):
+def load_key(key_desc, pin=None, key_type="private"):
     session = None
     if key_desc.startswith("pkcs11:"):
         pkcs11_dict = parse_pkcs11_uri(key_desc)
