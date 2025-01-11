@@ -36,12 +36,12 @@ Signs using CMS the given data using the specified key and certificate.
 - `data`: The data to be signed.
 - `pin`: The pin or passphrase for accessing the key (optional).
 
-### `crypto_helper.cms_verify(data, cert, signature)`
+### `crypto_helper.cms_verify(cert, data, signature)`
 
 Verifies the given CMS signature for the specified data using the certificate.
 
-- `data`: The data to be signed.
 - `cert`: The certificate file in pem format.
+- `data`: The data to be signed.
 - `signature`: the cms signature to be verified in der format.
 
 ### `crypto_helper.encrypt(key_desc, ivt, data, pin)`

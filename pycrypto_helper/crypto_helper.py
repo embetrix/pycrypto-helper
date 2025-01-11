@@ -255,7 +255,7 @@ def verify(key_desc, data, signature, pin=None):
         print(f"Error verifying signature: {e}")
         raise
 
-def cms_verify(data, certificate, signature):
+def cms_verify(certificate, data, signature):
     try:
         cms_data = cms.ContentInfo.load(signature)
         cert = load_pem_certificate(certificate)
