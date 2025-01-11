@@ -9,6 +9,13 @@ Cryptographic operations can be challenging, especially when handling different 
 sudo python3 -m pip install .
 ```
 
+
+To install the library from PyPI, use the following command:
+
+```bash
+sudo pip install pycrypto-helper
+```
+
 ## Available Functions
 
 ### `crypto_helper.sign(key_desc, data, pin)`
