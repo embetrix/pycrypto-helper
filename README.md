@@ -1,6 +1,7 @@
 # pycrypto-helper
 
-A helper library for PKCS#11 and cryptographic operations.
+Cryptographic operations can be challenging, especially when handling different key types and PKCS#11. 
+`pycrypto-helper` is a helper library designed to simplify cryptographic operations, including signing, verifying, encrypting, and decrypting data using various key types and PKCS#11 tokens.
 
 ## Installation
 
