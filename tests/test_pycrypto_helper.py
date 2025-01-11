@@ -72,9 +72,18 @@ def test_pkcs11_cms_sign_and_verify():
     crypto_helper.cms_verify("testcertECp256.pem", data, signature)
 
 def test_encrypt_and_decrypt():
+    data = b"Hello, world!"
     key_desc = "aes.key"
     ivt = "000102030405060708090a0b0c0d0e0f"
+    encrypted_data = crypto_helper.encrypt(key_desc, ivt, data)
+    assert encrypted_data is not None, "Failed to encrypt data"
+    decrypted_data = crypto_helper.decrypt(key_desc, ivt, encrypted_data)
+    assert decrypted_data == data, f"Expected {data}, got {decrypted_data}"
+
+def test_pkcs11_encrypt_and_decrypt():
     data = b"Hello, world!"
+    key_desc = "pkcs11:token=token0;object=testkeyAES256"
+    ivt = "000102030405060708090a0b0c0d0e0f"
     encrypted_data = crypto_helper.encrypt(key_desc, ivt, data)
     assert encrypted_data is not None, "Failed to encrypt data"
     decrypted_data = crypto_helper.decrypt(key_desc, ivt, encrypted_data)
@@ -90,6 +99,7 @@ if __name__ == "__main__":
         test_cms_sign_and_verify()
         test_pkcs11_cms_sign_and_verify()
         test_encrypt_and_decrypt()
+        test_pkcs11_encrypt_and_decrypt()
         print("All tests passed!")
     except Exception as e:
         print(f"An error occurred: {e}")
