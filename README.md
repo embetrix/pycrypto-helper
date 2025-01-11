@@ -66,9 +66,19 @@ Decrypts using AES the given encrypted data using the specified key.
 
 ```python
 from pycrypto_helper import crypto_helper
-key_desc = "pkcs11:token=token0;object=testkeyECp256"
+
+# using key file
+key_desc = "ecdsa_key.pem"
 data = b"Hello, world!"
-signature = crypto_helper.sign(key_desc, data, "12345")
-crypto_helper.verify(key_desc, data, signature, "12345")
+signature = crypto_helper.sign(key_desc, data)
+print(signature.hex())
+crypto_helper.verify(key_desc, data, signature)
+
+# using pkcs11 token
+key_desc = "pkcs11:token=SmartCard-HSM%20%28UserPIN%29;id=%01;object=testkeyECp256"
+data = b"Hello, world!"
+signature = crypto_helper.sign(key_desc, data, "123456")
+print(signature.hex())
+crypto_helper.verify(key_desc, data, signature, "123456")
 ```
 
