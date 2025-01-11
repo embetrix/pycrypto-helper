@@ -33,7 +33,7 @@ def load_key(key_desc, pin=None, key_type="private"):
     session = None
     if key_desc.startswith("pkcs11:"):
         pkcs11_dict = parse_pkcs11_uri(key_desc)
-        lib_path = os.environ.get('PKCS11_MODULE_PATH', '/usr/local/lib/softhsm/libsofthsm2.so')
+        lib_path = os.environ.get('PKCS11_MODULE_PATH', '/usr/lib/x86_64-linux-gnu/opensc-pkcs11.so')
         lib = pkcs11.lib(lib_path)
         token = lib.get_token(token_label=pkcs11_dict['token'])
         session = token.open(user_pin=pin)
