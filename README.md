@@ -6,14 +6,14 @@ Cryptographic operations can be challenging, especially when handling different 
 ## Installation
 
 ```bash
-sudo python3 -m pip install .
+pip install .
 ```
 
 
 To install the library from PyPI, use the following command:
 
 ```bash
-sudo pip install pycrypto-helper
+pip install pycrypto-helper
 ```
 
 ## Available Functions
